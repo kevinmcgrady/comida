@@ -1,0 +1,28 @@
+<%- include('includes/header'); %>
+<div class="gradientBackground">
+    <%- include('includes/authNavigation'); %>
+    <div class="container authContainer">
+        <h1 class="text-center authHeading">Login</h1>
+        <div class="row justify-content-center">
+            <div class="col-10">
+                <p class="authError"></p>
+                <form class="authForm" id="loginForm">
+                    <label for="email">EMAIL ADDRESS</label> 
+                    <input name="email" type="email" id="email">
+                    <label for="password">PASSWORD</label> 
+                    <input name="password" type="password" id="password">
+                    <div>
+                        <button class="button authButton" type="submit">LOGIN</button>
+                        <div class="spinner-border" role="status" id="spinner">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<%- include('includes/scripts'); %>
+<script src="/js/login.js"></script>
+</body>
+</html>

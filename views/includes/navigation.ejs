@@ -1,0 +1,39 @@
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color:#283541;">
+    <%if(role && role == "restaurant") { %>
+        <a class="navbar-brand"></a>
+    <% } %>
+    <% if(role && role === "user") { %>
+        <img src="../../images/searchicn.png" class="searchicon" alt="searchicon">
+    <form class="searchForm" name="navSearch" method="post" action="/restaurant/search">
+        <input class="form-control-sm navSearch" type="search" name="navSearch" placeholder="Search by City" aria-label="Search">
+        <button class="navSearchBtn btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+    </form> 
+   <% } %>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <% if(role && role === "user") { %>
+                <li class="nav-item">
+                    <a class="nav-link" href="/restaurant/categories">Categories</a>
+                </li>
+            <% } %>
+        <% if(role && role === "user") { %>
+            <li class="nav-item">
+                <a class="nav-link" href="/user/account">Account</a>
+            </li>
+        <% } else if(role && role === "restaurant") { %>
+            <li class="nav-item">
+                <a class="nav-link" href="/restaurant/account">Bookings</a>
+            </li>
+            <% } %>   
+        <% if(isLoggedIn) { %>
+            <li class="nav-item">
+                <a class="nav-link" id="logout" href="#">Logout</a>
+            </li>
+        <% } %>
+        </ul>
+    </div>
+</nav>

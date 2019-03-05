@@ -1,0 +1,44 @@
+<%- include('includes/header'); %>
+<%- include('includes/navigation') %>
+<section class="heading" style="background-image: url(/images/bb.jpg)">
+    <div class="headerOverlay"></div>
+</section>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-11">
+            <h1 class="pageHeading"><%= restaurant.data.name %></h1>
+            <section class="restInfo">
+                <div class="info center">
+                    <h3>Info</h3>
+                    <p class="bold"><%= restaurant.data.address %></p>
+                    <p class="bold"><%= restaurant.data.city %>, <%= restaurant.data.postcode %></p>
+                </div>
+                <div class="info center">
+                    <h3>Menu</h3>
+                    <p class="bold">Please find our menu at:</p>
+                    <p>
+                        <a><%= restaurant.data.website %></a>
+                    </p>
+                </div>
+                <div class="info center">
+                    <h3>Opening Times</h3>
+                    <p><span class="bold">Monday-Friday:</span> 10AM - 11PM</p>
+                    <p><span class="bold">Saturday:</span> 9AM - 12AM</p>
+                    <p><span class="bold">Sunday:</span> 11AM - 9PM</p>
+                </div>
+            </section>
+            <div class="bookButton">
+                <% if(restaurant.data.status === "online") { %>
+                    <a href="/restaurant/booking/<%= restaurant.id %>" class="button">BOOK</a>
+                <% } else { %>
+                    <p>This reataurant is offline!</p>
+                    <p><a href="/user/account" class="button">ACCOUNT</a></p>
+                <% } %>
+            </div>
+        </div>
+    </div>
+</div>
+<footer class="footer"></footer>
+<%- include('includes/scripts'); %>
+</body>
+</html>

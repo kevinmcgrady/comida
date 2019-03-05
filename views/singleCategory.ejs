@@ -1,0 +1,33 @@
+<%- include('includes/header'); %>
+<%- include('includes/navigation') %>
+<section class="heading" style="background-image: url(/images/american.jpg)">
+    <div class="headerOverlay"></div>
+</section>
+	<div class="container">
+        <div class="row justify-content-center">
+            <div class="col-11">
+                <section class="main">
+                    <h1 class="pageHeading">American</h1>
+                    <% if(status === "success") { %>
+                        <% restaurants.forEach((restaurant) => { %>
+                            <a href="/restaurant/<%= restaurant.id %>">
+                                <div class="cuisine" style="background-image: url(/images/bb.jpg)">
+                                    <div class="categoryOverlay"> 
+                                        <h3><%= restaurant.data.name %> <span><%= restaurant.data.priceRange %></span></h3>
+                                    </div>
+                                </div>
+                            </a>
+                       <% }) %>
+                    <% } else if(status === "error") { %>
+                        <div class="notification errorNotification">
+                            <p><%= message %></p>
+                        </div>
+                        <% } %>
+                </section>
+            </div>
+        </div>
+    </div>
+    <footer class="footer"></footer>
+<%- include('includes/scripts'); %>
+</body>
+</html>

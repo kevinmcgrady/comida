@@ -1,0 +1,81 @@
+<%- include('includes/header'); %>
+<%- include('includes/navigation') %>
+
+<% if(message.length > 0) { %>
+    <div class="notification errorNotification">
+            <p><%= message %></p>
+    </div>
+<% } %>
+
+<div class="container">
+        <div class="row justify-content-center">
+            <div class="col-11">
+                <section class="booking">
+                    <h1 class="pageHeading bookingHeader">Make a Reservation</h1>
+                    <h2 class="subheading">for <%= restaurant.name %></h2>
+                </section>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+                <div class="col-11">
+                    <section class="bookingDetails">
+                        <form class="authForm bookingForm" id="bookingForm" method="POST" action="/restaurant/booking">
+                            <label for="datepicker">DATE</label> 
+                            <input name="date" type="text" id="datepicker">
+
+                            <label for="time">TIME</label> 
+                            <select name="time" required id="time">
+                                <option value="">Please select a time</option>
+                                <% restaurant.openingTimes.forEach((time) => { %>
+                                    <option value="<%= time %>"><%= time %></option>
+                                <% }) %>
+                            </select>
+
+                            <label for="adults">ADULTS</label> 
+                            <select name="adults" required id="adults">
+                                <option value="">Please select the number of adults</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                            </select>
+
+                            <label for="children">CHILDREN</label>
+                            <select name="children" required id="children">
+                                <option value="">Please select the number of children</option>
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                            </select>
+
+                            <label for="table">TABLE</label> 
+                            <select name="table" required id="table">
+                                <option value="">Please select a table</option>
+                                <% restaurant.table.forEach((table) => { %>
+                                    <option value="<%= table %>"><%= table %></option>
+                                <% }) %>
+                            </select>
+
+                            <label for="additionalComments">ADDITIONAL COMMENTS (optional)</label> 
+                            <textarea name="additionalComments" id="additionalComments"></textarea>
+                            <input type="hidden" name="restaurantId" value="<%= restaurantId %>">
+                            <div class="buttonContainer book">
+                                <button class="button authButton" type="submit">CONFIRM</button>
+                                <a href="/user/account" class="button authButton cancel">CANCEL</a>
+                            </div>
+                        </form>
+                    </section>
+                </div>
+            </div>
+    </div>
+    <footer class="footer"></footer>
+<%- include('includes/scripts'); %>
+<script src="/js/bookingValidation.js"></script>
+</body>
+</html>

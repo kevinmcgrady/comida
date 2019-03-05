@@ -1,0 +1,52 @@
+<%- include('includes/header'); %>
+<%- include('includes/navigation') %>
+<section class="heading gradiant">
+    <div class="headerContent">
+        <h1>Welcome Back</h1>
+        <h2><%= restaurant.name %></h2>
+    </div>
+</section>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-11">
+            <section class="restAccount">
+                <h1 class="pageHeading">Reservations</h1>
+                <div class="buttonContainer">
+                    <form action="/restaurant/status" method="POST">
+                        <% if(restaurant.status === "online") { %>
+                            <input type="hidden" name="status" value="offline">
+                            <button type="submit" class="button cancel">GO OFFLINE</button>
+                         <% } else if(restaurant.status === "offline") { %>
+                            <input type="hidden" name="status" value="online">
+                            <button type="submit" class="button activate">GO ONLINE</button>
+                            <% } %>
+                    </form>
+                </div>
+            </section>
+            <% bookings.forEach((bookingDate) => { %>
+                <section class="bookings">
+                    <h3><%= new Date(bookingDate[0].title).toLocaleDateString('en-GB', { day: "numeric", month: "long", year: "numeric" }) %></h3>
+                        <% bookingDate.forEach((booking) => { %>
+                            <div class="customerInformation">
+                                    <p><span class="bold">Name:</span> <%= booking.bookings.userFirstName %> <%= booking.bookings.userLastName %></p>
+                                    <p><span class="bold">Contact Number:</span> <%= booking.bookings.userContactNumber %></p>
+                                    <p><span class="bold">Date:</span> <%= new Date(booking.bookings.date.toDate()).toLocaleDateString('en-GB', { day: "numeric", month: "long", year: "numeric" }) %></p>
+                                    <p><span class="bold">Time:</span> <%= booking.bookings.time %></p>
+                                    <p><span class="bold">Adults:</span> <%= booking.bookings.adults %></p>
+                                    <p><span class="bold">Children:</span> <%= booking.bookings.children %></p>
+                                    <p><span class="bold">Table:</span> <%= booking.bookings.table %></p>
+                                    <% if(booking.bookings.additionalComments) { %>
+                                        <p><span class="bold">Additional Comments:</span></p>
+                                        <p><%= booking.bookings.additionalComments %></p>
+                                    <% } %>
+                                </div>
+                        <% }) %>
+                    </section>
+            <% }) %>
+        </div>
+    </div>
+</div>
+<footer class="footer"></footer>
+<%- include('includes/scripts'); %>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<%- include('includes/header'); %>
+<div class="gradientBackground">
+    <%- include('includes/authNavigation'); %>
+    <div class="container authContainer">
+        <h1 class="text-center authHeading">Register</h1>
+        <div class="row justify-content-center">
+            <div class="col-10">
+                <p class="authError"></p>
+                <form class="authForm" id="registerForm">
+                    <label for="firstName">FIRST NAME</label> 
+                    <input name="firstName" type="text" id="firstName">
+
+                    <label for="lastName">LAST NAME</label> 
+                    <input name="lastName" type="text" id="lastName">
+
+                    <label for="email">EMAIL</label> 
+                    <input name="email" type="email" id="email">
+
+                    <label for="contactNumber">CONTACT NUMBER</label> 
+                    <input name="contactNumber" type="text" id="contactNumber">
+
+                    <label for="password">PASSWORD</label> 
+                    <input name="password" type="password" id="password">
+
+                    <button class="button authButton" type="submit">REGISTER</button>
+                    <div class="spinner-border" role="status" id="spinner">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<%- include('includes/scripts'); %>
+<script src="/js/register.js"></script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<%- include('includes/header'); %>
+<%- include('includes/navigation') %>
+
+<% if(message.length > 0) { %>
+    <div class="notification successNotification">
+            <p><%= message %></p>
+    </div>
+<% } %>
+
+<section class="heading gradiant">
+    <div class="headerContent">
+        <h1>Welcome Back</h1>
+        <h2><%= user.firstName %> <%= user.lastName %></h2>
+    </div>
+</section>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-11">
+            <section class="current">
+                <h1 class="pageHeading">Current Reservations</h1>
+                <% if(bookingsCurrent.length == 0){ %>
+                    <div class="bookButton">
+                        <h5 class="center">You have no current reservations.</h5>
+                        <a class="button center" href="/restaurant/categories/">View restaurants</a>
+                    </div>
+                <%} %>
+                <% bookingsCurrent.forEach((booking) => { %>
+                <div class="info">
+                    <div class="cuisine" style="background-image: url(/images/bb.jpg)">
+                        <div class="categoryOverlay"> 
+                            <h3><%= booking.restaurantName %></h3>
+                        </div>
+                    </div>
+                    <div class="bookingInformation">
+                        <p><span class="bold">Date: </span><%= new Date(booking.modifiedDate).toLocaleDateString('en-GB', { day: "numeric", month: "long", year: "numeric" });  %></p>
+                        <p><span class="bold">Time:</span><%= booking.time %></p>
+                        <p><span class="bold">Adults:</span><%= booking.adults %></p>
+                        <p><span class="bold">Children:</span><%= booking.children %></p>
+                        <% if(booking.additionalComments) { %>
+                            <p><span class="bold">Additional Comments:</span></p>
+                            <p><%= booking.additionalComments %></p>
+                        <% } %> 
+                    </div>
+                    <form action="/restaurant/cancel" method="POST">
+                        <input type="hidden" name="restaurantId" value="<%= booking.restaurant %>">
+                        <input type="hidden" name="bookingId" value="<%= booking.bookingId %>">
+                        <button type="submit" class="button cancel">CANCEL</button>
+                    </form>
+                </div>
+                <% }) %>
+            </section>
+            <% if(bookingsPast.length > 0) { %>
+            <section class="past">
+                    <h1 class="pageHeading">Past Reservations</h1>
+                <% bookingsPast.forEach((booking) => { %>
+                <div class="info">
+                    <div class="cuisine" style="background-image: url(/images/bb.jpg)">
+                        <div class="categoryOverlay"> 
+                            <h3><%= booking.restaurantName %></h3>
+                        </div>
+                    </div>
+                    <a href="/restaurant/booking/<%= booking.restaurant %>" class="button">BOOK</a>
+                </div>
+                <% }) %>
+            </section>
+            <% } %>
+        </div>
+    </div>
+</div>
+<footer class="footer"></footer>
+<%- include('includes/scripts'); %>
+</body>
+</html>
